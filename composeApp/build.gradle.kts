@@ -9,6 +9,8 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+
+    kotlin("plugin.serialization") version "2.1.0"
 }
 
 kotlin {
@@ -58,6 +60,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation("io.ktor:ktor-client-android:3.0.1")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -68,10 +71,17 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
+            implementation("io.ktor:ktor-client-core:3.0.1")
+            implementation("io.ktor:ktor-client-content-negotiation:3.0.1")
+            implementation("io.ktor:ktor-serialization-kotlinx-json:3.0.1")
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutines.swing)
+            implementation("io.ktor:ktor-client-cio:3.0.1")
+        }
+        iosMain.dependencies {
+            implementation("io.ktor:ktor-client-darwin:3.0.1")
         }
     }
 }
